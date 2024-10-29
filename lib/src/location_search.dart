@@ -329,7 +329,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
         );
       },
       separatorBuilder: (context, index) => Divider(
-        color: _defaultSearchBarColor,
+        color: Color.fromRGBO(91, 95, 104, 1),
       ),
     );
   }
@@ -493,8 +493,8 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
   /// this is used if mode = Mode.overlay
   ///
   Widget _buildDialog() {
-    return Dialog(
-      backgroundColor: Colors.white,
+    return Material(
+      color: Colors.white,
       surfaceTintColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
