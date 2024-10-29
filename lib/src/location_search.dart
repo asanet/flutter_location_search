@@ -494,6 +494,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
   ///
   Widget _buildDialog() {
     return Dialog(
+      backgroundColor: Colors.white,
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(15)),
       ),
