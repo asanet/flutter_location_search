@@ -155,8 +155,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
     }
 
     if (permission == LocationPermission.deniedForever) {
-      const error =
-          PermissionDeniedException('Location Permission is denied forever');
+      const error = PermissionDeniedException('Location Permission is denied forever');
       onError(error);
       // Permissions are denied forever, handle appropriately.
       return Future.error(error);
@@ -188,8 +187,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
 
     try {
       final response = await client.get(Uri.parse(url));
-      final decodedResponse =
-          jsonDecode(utf8.decode(response.bodyBytes)) as Map<dynamic, dynamic>;
+      final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as Map<dynamic, dynamic>;
 
       final posData = _getLocationData(decodedResponse);
 
@@ -237,9 +235,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
         )
         .fold<String>(
           '',
-          (previousValue, element) => previousValue.isEmpty
-              ? element.value
-              : '$previousValue, ${element.value}',
+          (previousValue, element) => previousValue.isEmpty ? element.value : '$previousValue, ${element.value}',
         );
 
     return LocationData(
@@ -357,24 +353,37 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
         Padding(
           padding: const EdgeInsets.all(16),
           child: TextFormField(
-            textDirection: isRTL(_searchController.text)
-                ? TextDirection.rtl
-                : TextDirection.ltr,
+            textDirection: isRTL(_searchController.text) ? TextDirection.rtl : TextDirection.ltr,
             style: TextStyle(color: widget.searchBarTextColor),
             controller: _searchController,
             focusNode: _focusNode,
+            cursorColor: Color.fromRGBO(36, 107, 254, 1),
             decoration: InputDecoration(
               filled: true,
               contentPadding: const EdgeInsets.symmetric(horizontal: 16),
-              fillColor:
-                  widget.searchBarBackgroundColor ?? _defaultSearchBarColor,
+              fillColor: widget.searchBarBackgroundColor ?? _defaultSearchBarColor,
               hintText: widget.searchBarHintText,
-              hintTextDirection: isRTL(widget.searchBarHintText)
-                  ? TextDirection.rtl
-                  : TextDirection.ltr,
+              hintTextDirection: isRTL(widget.searchBarHintText) ? TextDirection.rtl : TextDirection.ltr,
               border: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(16),
-                borderSide: BorderSide.none,
+                borderSide: BorderSide(
+                  color: Color.fromRGBO(91, 95, 104, 1),
+                  width: 1.0,
+                ),
+              ),
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: Color.fromRGBO(91, 95, 104, 1),
+                  width: 1.0,
+                ),
+              ),
+              focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(16),
+                borderSide: BorderSide(
+                  color: Color.fromRGBO(36, 107, 254, 1),
+                  width: 1.0,
+                ),
               ),
               hintStyle: TextStyle(color: widget.searchBarHintColor),
               suffixIcon: IconButton(
@@ -424,15 +433,13 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
         'polygon_geojson': '1',
         'addressdetails': '1',
         'accept-language': widget.language,
-        if (widget.countryCodes != null)
-          'countrycodes': widget.countryCodes!.join(','),
+        if (widget.countryCodes != null) 'countrycodes': widget.countryCodes!.join(','),
       },
     );
 
     final response = await _client.get(uri);
 
-    final decodedResponse =
-        jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
+    final decodedResponse = jsonDecode(utf8.decode(response.bodyBytes)) as List<dynamic>;
     return decodedResponse.map((e) => _getLocationData(e)).toList();
   }
 
@@ -493,8 +500,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
       // content: const Text("Save successfully"),
       child: SizedBox(
         // height: MediaQuery.of(context).size.height - 300,
-        child:
-            isLoading ? Center(child: widget.loadingWidget) : _buildSearchBar(),
+        child: isLoading ? Center(child: widget.loadingWidget) : _buildSearchBar(),
       ),
     );
   }
@@ -504,8 +510,7 @@ class _LocationSearchWidgetState extends State<LocationSearchWidget> {
   Widget _buildScaffold() {
     return Scaffold(
       body: SafeArea(
-        child:
-            isLoading ? Center(child: widget.loadingWidget) : _buildSearchBar(),
+        child: isLoading ? Center(child: widget.loadingWidget) : _buildSearchBar(),
       ),
     );
   }
